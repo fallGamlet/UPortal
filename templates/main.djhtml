@@ -1,0 +1,51 @@
+{% extends "base.djhtml" %}
+
+{% block scripts %}
+	{{ block.super }}
+	<script type="text/javascript" src="/static/js/calendar-widget.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			var today = new Date()
+			$("#calendar").calendarWidget();
+			
+			$.ajax({
+				url : '/curdate/',
+				type: 'get',
+				dataType: 'json',
+				success: function(jsonRes){
+					if(jsonRes){
+						console.log(jsonRes);
+					}
+				},
+				error: function(){
+					console.log('something error')
+				}
+			});
+		});
+	</script>
+{% endblock %}
+{% block workspace %} 
+	<div style="width: 300px; float:right; background:transparent;">
+		<div id="calendar" class="calendar_table"></div>
+		<div class="print_news">
+			{% for item in news %}
+			<p>
+				<b>{{ item.title|upper }}</b>
+				<br/>
+				{{ item.body|linebreaksbr|capfirst }}
+			</p>
+			{% empty %}
+			<p> Новостей нет. 8)</p>
+			{% endfor %}
+		</div>
+	</div>
+	<div class="main_about">
+		
+		<div class='welcome_message' style='background:#fff'>
+			{{ welcomemessage.post|safe }}
+		</div>
+		{#% include 'bell_schedule.djhtml' %#}
+		<!--div id="calendar" class="calendar_table"></div-->
+	</div>
+{% endblock %}
+

@@ -1,0 +1,15 @@
+<table class='search_book'>
+			<tr>
+				<th><label>{{sform.title.label}}:</label></th> <td>{{ sform.title}}</td>
+				<th width='20px'></th>
+				<th><label>{{sform.authors.label}}:</label></th> <td>{{ sform.authors}}</td>
+			</tr>
+			<tr height='10px'></tr>
+			<tr>
+				<th><label>{{sform.btype.label}}:	</label></th> <td>{{ sform.btype }}</td>
+				<th width='20px'></th>
+				<th><label>{{sform.subjects.label}}:</label></th> <td>{{ sform.subjects }}</td>
+			</tr>
+			<tr height='20px'></tr>
+			<tr><td colspan='5' align='right'><input id='sub0' class='submit' type='submit' value='Найти'></td></tr>
+</table>

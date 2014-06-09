@@ -1,0 +1,27 @@
+<div class='accordion'>
+	{% for book in books %}
+	<h4>
+		{% if book.booktype.image %}
+			<img src="{{ book.booktype.image.url }}" alt='Нет картинки'>
+		{% else %}
+			<img src="/media/preview/document.png" alt='Нет картинки'>
+		{% endif %}
+		{% if book.bookfile %}
+			<a class="botton" href="{{ book.bookfile.url }}" title="{{ book.bookfile.size|filesizeformat }}">Файл</a>
+		{% endif%}
+		{{ book.title }}
+	</h4>
+	<p>
+		{% if book.authors %} Авторы: {{ book.authors }} <br>{% endif %}
+		{% if book.publisher %} Издатель: {{ book.publisher }} {{ book.place }} <br> {% endif %}
+		{% if book.year %} Год: {{ book.year }} <br> {% endif %}
+		{% if book.page %} Страниц: {{ book.page }} <br> {% endif %}
+		Тип: {{ book.booktype.name }} <br>
+		Дисциплины:
+			{% for s in book.subjects.all %}
+			{{ s.name }}{% if forloop.last %}.{% else %},{% endif %}
+			{% endfor %}
+		{% if book.description %}<br/>{{ book.description }} {% endif %}
+	</p>
+	{% endfor %}
+</div>

@@ -1,0 +1,57 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	{% block meta %}
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<meta http-equiv="content-language" content="ru" />
+	{% endblock %}
+	{% block links %}
+	<link rel="stylesheet" type="text/css" href="/static/css/main_style.css">
+	{% endblock %}
+	<title>{% block title %}ИНФОРМАЦИОННЫЙ ПОРТАЛ ИТИ {% endblock %}</title>
+	{% block scripts %}
+	<script type="text/javascript" src="/static/js/jquery.js"></script>
+	<script type="text/javascript" src="/static/js/my_script.js"></script>
+	{% endblock %}
+</head>
+<body>
+<div id="background">
+	<a href="/admin/"><div class='to_admin'>Администрирование</div></a>
+	<div id="top">
+		<b>
+			<h1 style="font-size: 32pt;">ИНФОРМАЦИОННЫЙ ПОРТАЛ</h1>
+			<h1>Инженерно-технический институт </h1>
+			<br/>
+			<h3 align='right'>Мы готовы делиться своими знаниями со всеми, кто ставит перед собой новые цели, бросает вызов сложностям и стремится расти </h3>
+		</b>
+	</div>
+	
+	<div id="links">
+		{% for link, verbose_name in links %}
+		<a href="{{ link }}"> {{ verbose_name }}</a>
+		{% endfor %}
+	</div>
+	
+	<div id="menu">
+		<ul>
+			{% for item in menulinks %}
+			<li><a href="{{ item.0 }}">{{ item.1 }}<span></span></a></li>
+			{% empty %}
+			Нет ни одного элемента меню
+			{% endfor %}
+		</ul>
+		{% include 'bell_schedule.djhtml' %}
+	</div>
+	
+	<div id="content">
+		{% block workspace %} {% endblock %}
+	</div>
+	{% comment %}
+	{% endcomment %}
+</div>
+
+<div id="foot">
+	автор: Левицкий Егор Андреевич
+</div>
+</body>
+</html>

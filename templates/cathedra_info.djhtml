@@ -1,0 +1,75 @@
+{% extends "base.djhtml" %}
+{% block scripts %}
+	{{ block.super }}
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$(".accordion h4:first").addClass("active");
+			$(".accordion .data").hide();
+
+			$(".accordion h4").click(function(){
+				$(this).next(".data").slideToggle("slow").siblings(".data:visible").slideUp("slow");
+				$(this).toggleClass("active");
+				$(this).siblings("h4").removeClass("active");
+			});
+		});
+	</script>
+{% endblock %}
+{% block workspace %} 
+	{% if departments|length == 1%}
+	<div class="main_about" style='width:96%; padding: 10px 1em;'>
+		<h4>Кафедра: {{ departments.0.name }}</h4>
+		<h4>Сокращение: {{ departments.0.sname }}</h4>
+		<br />
+		<div class='directions'>
+			Направления:
+			<ul>
+				{% for edtype in departments.0.edtypes %}
+					{% for direction in edtype.directions %}
+					{% if forloop.first %}
+						<li>
+						{{ edtype.name }}:
+					{% endif %}
+					<br/> - <a href='/cathedra/direction/{{ direction.pk }}'>{{ direction.name }}</a>
+					{% endfor %}
+					{% if forloop.last %}
+						</li>
+					{% endif %}
+				{% endfor %}
+			</ul>
+		</div>
+		{% if departments.0.post %}
+			{{ departments.0.post.body|safe }} <br />
+		{% endif %}
+	</div>
+	{% else %}
+	<div class='accordion'>
+		{% for item in departments %}
+		<h4>{{ item.name }}</h4>
+		<div class='data'>
+			<a class="botton" href='/cathedra/{{ item.pk }}'>Подробнее о кафедре</a>
+			Сокращеине: <b>{{ item.sname }}</b>
+			<div class='directions'>
+			Направления:
+			<ul>
+				{% for edtype in item.edtypes %}
+					{% for direction in edtype.directions %}
+					{% if forloop.first %}
+						<li>
+						{{ edtype.name }}:
+					{% endif %}
+					{{ edtype.name }}:
+					<br /> - <a href='/cathedra/direction/{{ direction.pk }}'>{{ direction.name }}</a>
+					{% if forloop.last %}
+						</li>
+					{% endif %}
+					{% endfor %}
+				{% endfor %}
+			</ul>
+			</div>
+		</div>
+		{% empty %}
+		Не указаны кафедры.
+		{% endfor %}
+	</div>
+	{% endif %}
+{% endblock %}

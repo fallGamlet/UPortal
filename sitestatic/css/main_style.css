@@ -1,0 +1,465 @@
+a.botton{
+	background: #11a;
+	border: 0px solid #77a;
+	border-left: 6px solid #aaf;
+	border-right: 6px solid #aaf;
+	border-radius: 7px;
+	color: #fff;
+	float: right;
+	font-size: 14pt;
+	font-weight: 700;
+	margin: 2px;
+	padding: 5px 15px;
+	text-decoration: none;
+	cursor: pointer;
+}
+a.botton:hover{
+	border-color:#9F145E;
+}
+p.simple {
+	text-indent: 1.5em; /* Отступ первой строки */
+	text-align: justify; /* Выравнивание по ширине */
+}
+table {
+	/*width: 100%;*/
+	padding: 0px;
+	margin: 0px;
+}
+table tr{
+	/*width: 100%;*/
+	padding: 0px;
+	margin: 0px;
+}
+table td{
+	padding: 0px;
+	margin: 0px;
+	width: auto;
+}
+div {
+	background: #eef;
+	padding: 0px;
+	margin: 0px;
+}
+html, body {
+	padding: 0;
+	margin: 0;
+	height: 100%;
+}
+body {
+	background: #006 /*url(/static/img/portal.png)*/;
+	font-family: 'Times New Roman', 'Georgia', 'serif';
+	font-size: medium;
+	/*margin: 0px;
+	padding: 0px;
+	min-width: 800px;*/
+	/*min-height: 100%;*/
+	position: relative;
+	overflow: auto;
+}
+
+div.to_admin {
+	color: white;
+	background: black url(/static/img/gradient-full.png) repeat-x;
+	border: solid 4px #77b;
+	border-top: solid 0px #77b;
+	border-radius: 0 0 10px 10px;
+	padding: 5px;
+	margin: 0px;
+	position: absolute;
+	top: 0px;
+	right: 1em;
+	z-index: 50;
+}
+
+#background {
+	/*background: #fff url(/static/img/chess.png);*/
+	background: #fff;/* url(/static/img/portal.png) repeat-y;*/
+	/*background-position: 100% 150px;*/
+	display: block;
+	margin: 0px;
+	padding: 0px;
+	text-align: center;
+	/*min-width: 800px;*/
+	display: block;
+	/*overflow: auto;*/
+	min-height: 100%;
+	position: relative;
+}
+
+#top {
+	background: #008 url(/static/img/tile20.png) no-repeat scroll 0% 0%;
+	border:solid 0px #66a;
+	color: #FFF;
+	font-family: Times New Roman;
+	font-size: 12pt;
+	font-style: oblique;
+	margin: 0 auto;
+	padding: 15px 0px;
+	text-align: center;
+	display: block;
+	position: relative;
+	/*top: 0px;*/
+}
+#top h1, #top h3{
+	margin: 0px 0px;
+	padding: 2px 2em;
+	text-shadow: 1px 0px 2px #000, 0px 1px 2px #000, -1px 0px 2px #000, 0px -1px 2px #000;
+}
+
+#foot {
+	background: #008;
+	border: solid 0px #66a;
+	border-top: solid 1px #ddd;
+	color: white;
+	font-size: 12px;
+	font-style: italic;
+	margin: 0px;
+	padding: 5px 0px;
+	text-align: center;
+	display: block;
+	position: relative;
+	/*bottom: 0px;*/
+	/*min-height: 100px;*/
+}
+
+#menu {
+	/*background: transparent;*/
+	background: #fff url(/static/img/chess.png);
+	/*border-right: solid 1px #ccc;*/
+	float: left;
+	margin: 0px;
+	padding: 5px 0px;
+	width: 250px;
+	display: block;
+	min-height: 100%;
+	/*overflow: hidden;*/
+	position: relative;
+	z-index: 50;
+}
+#menu ul{
+	background-color: rgba(0,0,0,0);
+	margin: 0px ;
+	padding: 0px;
+	text-align: left;
+}
+#menu li {
+	/*background: #FFF;*/
+	list-style-type: none;
+	/*display: inline-block;*/
+	margin: 0px;
+	padding: 0px;
+	/*border-bottom:solid 1px #11F;*/
+	/*border-top:solid 3px #999;*/
+}
+#menu li > a{
+	display: inline-block;
+	padding: 5px 0 5px 1em;
+	margin: 0px 0px;
+	color: #335;
+	text-decoration: none;
+	font-weight: bold; 
+	/*font-size: 12px;*/
+	border-radius: 0;
+	/*border: none 1px #ccc;*/
+	width: 100%;
+}
+#menu li>a:hover, #curmenu {
+	color: #fff;
+	background: #22b;
+	/*border: solid 1px #77f;*/
+}
+#menu li>a:hover>span {
+    width: 0;
+    height: 0;
+    border-top: 8px solid #117;
+    border-bottom: 8px solid transparent;
+    border-left: 8px solid #117;
+    border-right: 8px solid transparent;
+    display: inline-block;
+    float:right;
+    position:relative;
+    right: -0px;
+    bottom: -1.5em;
+    z-index: 0;
+}
+
+#links {
+	background: #fff;
+	border-top: solid 1px #ddd;
+	border-bottom: solid 1px #ddd;
+	margin: 0px;
+	padding: 5px;
+	text-align: left;
+	/*font-size: 10pt;*/
+	/*width: 100%;*/
+	display: block;
+	position: relative;
+}
+#links a {
+	/*display: inline-block;*/
+	background: #bbe;
+	text-decoration: none;
+	color: black;
+    border: solid 1.2px white;
+    border-right: none;
+    border-radius: 170px 50px 70px 0px;
+    margin: 0px;
+    margin-right: -10px;
+    padding: 2px 15px;
+}
+#links a:hover {
+	border-color: black;
+	/*font-weight: 700;*/
+}
+
+#content {
+	/*background: #fff url(/static/img/portal.png) repeat-y;*/
+	/*background-position: 100% 150px;*/
+	background: transparent;
+	margin: 0px;
+	margin-left: 250px;
+	padding: 0px;
+	/*min-width: 500px;*/
+	min-height: 100%;
+	display: block;
+	overflow: auto;
+	position: relative;
+}
+
+.main_about {
+	background: #fff;
+	margin: 0px;
+	margin-right: 305px;
+	padding: 0px 5px;
+	text-align: justify;
+	position: relative;
+}
+
+.print_news{
+	background: transparent;
+	float: right;
+	width: 100%;
+	min-height: 100%;
+	margin: 0px;
+	padding: 5px 0px;
+	position: relative;
+}
+.print_news p{
+	background: #FAFAFA;
+	border-top: solid 1px #55a;
+	border-bottom: solid 1px #55a;
+	margin: 0px 0px 5px;
+	padding: 2px 5px;
+	text-align: left;
+}
+
+table.bell_schedule {
+	background: #F1F1F1;
+	color: /*#fff;*/ #000;
+	border-top: solid 1px #E8E8E8;
+	border-radius: 0px;
+	padding: 2px 1em;
+	margin: 1em 0 0 1em;
+	font-size: 14pt;
+	/*font-weight: bold;*/
+}
+table.bell_schedule caption {
+	background: #F1F1F1;
+	/*border: solid 1px #E8E8E8;*/
+	padding: 3px;
+}
+table.bell_schedule td {
+	padding: 3px 10px;
+}
+table.bell_schedule tr {
+	margin: 1px;
+	border: solid 1px #B3AEFF;
+}
+
+#calendar {
+	background: #FAFAFA;
+	color: #000;
+	display: block;
+	width: 98%;
+	text-align:center;
+	margin:0;
+	padding:0;
+}
+
+#calendar .nav-prev {
+	background: transparent;
+	float: left;
+}
+#calendar .nav-next {
+	background: transparent;
+	float: right;
+}
+.nav-prev a, .nav-next a{
+	color: #000;
+	display: inline-block;
+	margin: 3px 10px;
+	text-decoration: none;
+}
+#current-month {
+	width: 100%;
+	margin:0;
+	padding:0;
+}
+table.calendar-month {
+	width: 100%;
+	border: solid 1px #EEE;
+	display: block;
+	margin: 0px;
+	padding: 0px;
+}
+table.calendar-month caption {
+	/*background: #F1F1F1;*/
+}
+table.calendar-month td {
+	padding: 3px 10px;
+	text-align: right;
+}
+table.calendar-month td#curday {
+	background: #1111BB;
+	border: solid 1px /*#FFDAA5*/ #eee;
+	/*border-radius: 5px;*/
+	/*box-shadow: 0px 0px 3px 5px rgba(0,256,128,0.5);*/
+	color: #FFF;
+}
+table.calendar-month tr {
+	margin: 1px;
+	border: solid 0px #B3AEFF;
+}
+
+
+table.search_book {
+	background: #E4E4FF;
+	border: solid 1px #FFEF6B;
+	border-radius: 5px; 
+	padding: 5px;
+	font-size: small;
+	text-align: left;
+}
+table.search_book th {
+	text-align: right;
+	vertical-align: top;
+}
+table.search_book td {
+	vertical-align: top;
+}
+table.search_book td input.submit {
+	text-align: center;
+	padding: 1px 15px;
+	color: black;
+	background: url(/static/img/gradient-full.png) repeat-x;
+	border: 0px none #77a;
+	border-left: 4px solid #77a;
+	border-right: 4px solid #77a;
+	border-radius: 5px;
+	cursor: pointer;
+}
+table.search_book td input.submit:hover {
+	border-left: 4px solid #9F145E;
+	border-right: 4px solid #9F145E;
+}
+table.search_book ul {
+	text-align: left;
+	padding: 0px;
+	margin: 0px;
+	width: 100%;
+	height: 89%;
+	margin: 0px;
+	padding: 0px;
+	overflow: auto;
+}
+table.search_book li.li_select {
+	/*display: inline;*/
+	background: inherit;
+	list-style-type: none;
+	width: 100%;
+	margin: 0px;
+	padding: 1px 0px;
+	cursor: pointer;
+}
+table.search_book li.li_select_checked {
+	/*display: inline;*/
+	background:#BEFF75;
+	list-style-type: none;
+	width: 100%;
+	margin: 0px;
+	padding: 1px 0px;
+	cursor: pointer;
+}
+table.search_book li:hover{
+	background: #aaf;
+}
+table.search_book li:target{
+	background: #faf;
+}
+
+div.accordion{
+	background: #ccf;
+	border: solid 2px #c4c4c4;
+	border-bottom: solid 1px #c4c4c4;
+	border-radius: 5px;
+	/*float: left;*/
+	margin: 0px;
+	padding: 0px 3px;
+	text-align: left;
+	width: 99%;
+}
+div.accordion h4{
+	background: #e9e7e7;
+	margin: 0px;
+	padding: 3px 5px;
+	/*font: bold 120%/100% Arial, Helvetica, sans-serif;*/
+	border-top: solid 2px #11a;
+	border-bottom: solid 0px #999;
+}
+div.accordion h4:first-of-type {
+	border-top: solid 0px #999;
+}
+div.accordion h4:hover {
+	background-color: #c3c2e2;
+}
+div.accordion h4.active {
+	background-position: right 5px;
+}
+div.accordion h4 img{
+	background: none;
+	width: 36px;
+	margin: 0px;
+	padding: 2px;
+	vertical-align: middle;
+}
+div.accordion .data{
+	background: #f7f7f7;
+	margin: 0px;
+	padding:  10px 15px 20px;
+	border-left: solid 1px #c4c4c4;
+	border-right: solid 1px #c4c4c4;
+}
+
+div.directions {
+	padding: 5px;
+	background: inherit;
+}
+div.directions ul{
+	margin: 0px; 
+}
+
+.clickable {
+	color: black;
+	background: #fff url(/static/img/chess.png) repeat;
+	border: solid 1px #ccc;
+	border-radius: 5px;
+	cursor: pointer;
+}
+.clickable:hover {
+	background-color: #99f;
+}
+.clickable:active {
+	color: black;
+	background-color: #bbf;
+	border: solid 1px #fff;
+}

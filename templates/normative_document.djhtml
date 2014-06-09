@@ -1,0 +1,111 @@
+{% extends "base.djhtml" %}
+
+{% block scripts %}
+	{{ block.super }}
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$(".accordion h4:first").addClass("active");
+			$(".accordion div.data").hide();
+
+			$(".accordion h4").click(function(){
+				$(this).next("div.data").slideToggle()
+				.siblings("div.data:visible").slideUp();
+				$(this).toggleClass("active");
+				$(this).siblings("h4").removeClass("active");
+			});
+			
+			$(".educationtype").click(function(){
+				var id = this.id;
+				$("div.accordion").fadeOut("fast", function(){
+					$("div.accordion h4, div.data").hide();
+					$("div.accordion h4.class_"+id).show();
+					$("div.accordion div.class_"+id+":first").show();
+				}).fadeIn();
+			});
+			$("#edtype_all").click(function(){
+				$("div.accordion").fadeOut("fast", function(){
+					$("div.accordion h4").show();
+					$("div.accordion div.data:not(first)").hide();
+					$("div.accordion div.data:first").show();
+				}).fadeIn();
+			});
+		});
+	</script>
+{% endblock %}
+{% block workspace %}
+	{% if directions|length == 1 %}
+	<div style="text-align: left; margin:10px; padding:10px;">
+		<b>Направление: {{ directions.0.name|capfirst }}</b>
+		<br />
+		<b>Сокращение: {{ directions.0.sname}}</b>
+		{% if directions.0.educationtype %}
+			<br>
+			<b>Вид обучения: {{ directions.0.educationtype.name }}</b>
+		{% endif %}
+		{% if directions.0.cathedra %}
+			<br>
+			<b>Кафедра: {{ directions.0.cathedra.name }} ({{directions.0.cathedra.sname}})</b>
+		{% endif %}
+		{% if directions.0.subjects %}
+			<br />Дисциплины:
+			{% for subject in directions.0.subjects.all %}
+			<br /> - {{ subject.name|capfirst }}
+			{% endfor %}
+		{% endif %}
+		{% if directions.0.post.body %}
+		<br /> {{ directions.0.post.body }}
+		{% endif %}
+	</div>
+	{% else %}
+	<div style="background: none; margin:10px; padding:10px; display:block;">
+		{% for edtype in edtypes %}
+		<div id="edtype_{{ edtype.pk }}" class="educationtype clickable" style="display: inline; margin:5px; padding:10px; position: relative;">
+			{{ edtype.name }}
+		</div>
+		{% endfor %}
+		<div id="edtype_all" class="clickable" style="display: inline; margin:5px; padding:10px; position: relative;">
+			Все
+		</div>
+	</div>
+	<div class='accordion'>
+		{% for item in directions %}
+		<h4 class="class_edtype_{{ item.educationtype.pk }}">{{ item.name|capfirst }}</h4>
+		<div class="data  class_edtype_{{ item.educationtype.pk }}">
+			<a class="botton" href='/cathedra/direction/{{ item.pk }}'>Подробнее о направлении</a>
+			<b> Сокращение: {{ item.sname }}</b>
+			
+			{% if item.educationtype %}
+			<br><b>Вид обучения: {{ item.educationtype.name }}</b>
+			{% endif %}
+			
+			{% if item.cathedra %}
+			<br><b>Кафедра: {{ item.cathedra.name }}</b>
+			{% endif %}
+			
+			{% if item.doctypes %}
+			<p>
+				<br /> <b>Нормативные документы:</b>
+				{% for ndoclist in item.doctypes %}
+					{% if ndoclist|length > 2%}
+						<br />{{ndoclist.1}}:
+						{% for ndoc in ndoclist%}
+							{% if forloop.counter0 >= 2 %} 
+								{% if ndoc.docfile %}
+									<br /> - <a href="{{ ndoc.docfile.url }}">{{ndoc.title}}</a>
+								{% else %}
+									<br /> - {{ndoc.title}}
+								{% endif%}
+							{% endif %}
+						{% endfor %}
+						<br />
+					{% endif %}
+				{% endfor %}
+			</p>
+			{% endif %}
+		</div>
+		{% empty %}
+		Не указаны направления.
+		{% endfor %}
+	</div>
+	{% endif %}
+{% endblock %}

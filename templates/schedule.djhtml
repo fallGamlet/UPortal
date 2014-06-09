@@ -1,0 +1,4 @@
+{% extends "base.djhtml" %}
+{% block workspace %}
+	<h4>Расписание: Страница находится в разработке</h2>
+{% endblock %}

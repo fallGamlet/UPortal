@@ -1,0 +1,29 @@
+{% extends "base.djhtml" %}
+{% block workspace %}	
+	<div class="print_news" style="width:49%; float:left;">
+		{% for item in news %}
+			{% if forloop.counter0|divisibleby:"2" %}
+			<p>
+				<b>{{ item.title|upper }}</b>
+				<br/>
+				{{ item.body|linebreaksbr|capfirst }}
+			</p>
+			{% endif %}
+		{% empty %}
+		<p> Новостей нет. 8)</p>
+		{% endfor %}
+	</div>
+	<div class="print_news" style="width:49%; float:right;">
+		{% for item in news %}
+			{% if forloop.counter|divisibleby:"2" %}
+			<p>
+				<b>{{ item.title|upper }}</b>
+				<br/>
+				{{ item.body|linebreaksbr|capfirst }}
+			</p>
+			{% endif %}
+		{% empty %}
+		<p> Новостей нет. 8)</p>
+		{% endfor %}
+	</div>
+{% endblock %}

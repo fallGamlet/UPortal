@@ -1,0 +1,69 @@
+{% extends 'base.djhtml' %}
+{% block links %}
+	{{ block.super }}
+	<link rel="stylesheet" type="text/css" href="/static/css/widgets.css">
+{% endblock %}
+{% block scripts %}
+	{{ block.super }}
+<!--
+	<script type="text/javascript" src="/static/cp_adm/js/jsi18n.js"></script>
+	<script type="text/javascript" src="/static/cp_adm/js/core.js"></script>
+	<script type="text/javascript" src="/static/cp_adm/js/jquery.js"></script>
+	<script type="text/javascript" src="/static/cp_adm/js/jquery.init.js"></script>
+	<script type="text/javascript" src="/static/cp_adm/js/SelectBox.js"></script>
+	<script type="text/javascript" src="/static/cp_adm/js/SelectFilter2.js"></script>
+-->
+<script ype="text/javascript">
+	$(document).ready(function(){
+		//$("select").css({"min-width":"100%", "max-width":"100%","min-height":"50px"});
+		
+		$("select").each(function(){
+			var divtmp = $("<div class='div_select'></div>");
+			var ultmp = $("<ul class='ul_select'></ul>");
+			divtmp.css({"width":"100%", "height":"100px", "background":"#ffffff", "border":"1px solid black"});
+			$(this).after(divtmp);
+			$(divtmp).append(ultmp);
+			$(this).children().each(function(){
+				var curOption = $(this);
+				var cur = this;
+				var v = curOption.val();
+				var t = curOption.text();
+				var litmp = $("<li value='"+v+"'>"+t+"</li>");
+				if(cur.selected)
+					$(litmp).addClass("li_select_checked");
+				else
+					$(litmp).addClass("li_select");
+				$(ultmp).append(litmp);
+				litmp.click(function(){
+					cur.selected = !cur.selected;
+					var curli = $(this);
+					curli.removeClass();
+					if(cur.selected)
+						curli.addClass("li_select_checked");
+					else
+						curli.addClass("li_select");
+				});
+			})
+		}).hide();
+		
+		$(".accordion h4:first").addClass("active");
+		$(".accordion p").hide();
+		$(".accordion h4").click(function(){
+			$(this).next("p").slideToggle("slow").siblings("p:visible").slideUp("slow");
+			$(this).toggleClass("active");
+			$(this).siblings("h4").removeClass("active");
+		});
+	});
+</script>
+{% endblock %}
+{% block workspace %}
+<center>
+<form id='search_book' action='' method='get'>
+	{% include "search_book.djhtml"%}
+</form>
+</center>
+<br>
+{% if books %}
+{% include "book_preview.djhtml"%}
+{% endif %}
+{% endblock %}

@@ -1,0 +1,10 @@
+<table class='bell_schedule'>
+	<caption><b>Расписание звонков</b></caption>
+	{% for item in bellschedule %}
+	<tr>
+		<td>{{ item.num }}</td> <td>{{ item.timestart|time:'H:i' }}</td><td>{{ item.timeend|time:'H:i' }}</td>
+	</tr>
+	{% empty %}
+		в разработке
+	{% endfor %}
+</table>

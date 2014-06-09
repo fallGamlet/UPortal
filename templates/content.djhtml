@@ -1,0 +1,6 @@
+{% extends "base.djhtml" %}
+{% block workspace %}
+<div>
+	<a class="botton" style="float:right; font-size: 22pt;" href="/content/search/">Поиск</a>
+</div>
+{% endblock %}
