@@ -7,13 +7,13 @@ from ckeditor.fields import RichTextField
 import datetime
 
 def book_upload_path(instance, filename):
-	"""Generates upload path for FileField for Books"""
-	res = u'books/%s/%s' % (instance.booktype.sname, filename)
-	return res;
+    """Generates upload path for FileField for Books"""
+    res = u'books/%s/%s' % (instance.booktype.sname, filename)
+    return res
 
 def ducument_upload_path(instance, filename):
 	res = u'documents/%s/%s' %(instance.doctype.pk, filename)
-	return res;
+	return res
 
 
 class MyModel():	
@@ -39,10 +39,8 @@ class University(models.Model, MyModel):
 	sname = models.CharField(max_length = 50, verbose_name = 'Сокращение')
 	name = models.CharField(max_length = 200, verbose_name = 'Название')
 	description = models.TextField(max_length = 1000, verbose_name ='Описание', blank=True)
-	
 	def __unicode__(self):
 		return u'%s' %self.sname
-	
 	class Meta:
 		verbose_name = 'Университет'
 		verbose_name_plural = 'Университеты'
