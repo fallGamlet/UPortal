@@ -6,7 +6,7 @@
 		{% else %}
 			<img src="/media/preview/document.png" alt='Нет картинки'>
 		{% endif %}
-		{% if book.bookfile %}
+		{% if book.bookfile and if book.bookfile.is_exists %}
 			<a class="botton" href="{{ book.bookfile.url }}" title="{{ book.bookfile.size|filesizeformat }}">Файл</a>
 		{% endif%}
 		{{ book.title }}
