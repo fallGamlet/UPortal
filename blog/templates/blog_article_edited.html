@@ -1,0 +1,15 @@
+{% extends "blog_base.html" %}
+
+{%block content%}
+{%if error_info %}
+<h2>Не удалось внести изменения</h2>
+<p>
+    {{ error_info }}
+</p>
+{%else%}
+<h2>Запись успешно внесена</h2>
+<p>
+    {{message_info}}
+</p>
+{%endif%}
+{%endblock%}

@@ -1,0 +1,10 @@
+{% extends "blog_base.html" %}
+
+{%block content%}
+<h2>Недостаточно прав</h2>
+{%if error_info %}
+<p>
+    {{ error_info }}
+</p>
+{%endif%}
+{%endblock%}
