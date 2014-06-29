@@ -1,18 +1,52 @@
 <div class="article_list_preview_css">
 {% for article in articleList %}
     <div class="article_preview_css">
-        <h2 class="article_title_css">
+        <h3 class="article_title_css">
             {{article.title}}
-        </h2>
+        </h3>
         <div class="article_description">
             <span class="label">Автор:</span> <span class="value">{{article.author.get_full_name}}</span>
             <br>
             <span class="label">Дата:</span> <span class="value">{{article.date}}</span>
             <br>
-            {% for tag in article.tags %}
+            <span class="label">Теги:</span>
+            {% for tag in article.tags.all %}
+            {% if forloop.last %}
             <span class="article_tag_css">{{tag.name}}</span>
+            {%else%}
+            <span class="article_tag_css">{{tag.name}}, </span>
+            {%endif%}
             {%endfor%}
         </div>
     </div>
 {%endfor%}
+<style>
+    .article_list_preview_css {
+        background:#FFF;
+        margin:0;
+        padding:0;
+    }
+    .article_preview_css {
+        background:#222;
+        margin:2px 0;
+        padding:0;
+        border:1px solid #AAA;
+    }
+    h3.article_title_css {
+        background:#CCF;
+        margin:0;
+        padding:3px 5px;
+        /*border-bottom:1px solid #AAA;*/
+        cursor:point;
+    }
+    .article_description {
+        background:#FCFCFC;
+        margin:0;
+        padding:5px;
+        position:relative;
+    }
+    .article_description>span.label {
+        background:#FAFAFA;
+    }
+</style>
 </div>

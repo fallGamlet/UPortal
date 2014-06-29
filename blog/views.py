@@ -5,7 +5,8 @@ from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.contrib import auth
 from django.http import HttpResponseRedirect
-from form import LoginForm
+from django.db.models import Q
+from form import LoginForm, ArticleFrom, SearchArticleForm
 import models
 
 def main(request):
@@ -13,9 +14,15 @@ def main(request):
     :param request:
     :return:
     """
+    perm_checked, user, muser =  check_user(request)
+
     user = request.user
     if user.is_anonymous():
         return HttpResponseRedirect("/blog/login/")
+    else:
+        if not perm_checked:
+            return HttpResponseRedirect("/")
+
     return render_to_response("blog_base.html", {'user': user})
 
 
@@ -56,10 +63,147 @@ def log_out(request):
 
 
 def article_list(request):
-    user = request.user
+    perm_checked, user, muser = check_user(request)
     if user.is_anonymous():
         return HttpResponseRedirect("/blog/login/")
+    else:
+        if not perm_checked:
+            return HttpResponseRedirect("/")
 
     posts = models.Article.objects.filter(author__username=user.username)
     return render_to_response("blog_article_list.html",
                               {'articles':posts, 'user': user})
+
+
+def article_new(request):
+    perm_checked, user, muser = check_user(request)
+    if user.is_anonymous():
+        return HttpResponseRedirect("/blog/login/")
+    else:
+        if not perm_checked:
+            return HttpResponseRedirect("/")
+
+    if request.method == "GET":
+        form = ArticleFrom(initial={'author':muser.pk})
+        return render_to_response("blog_article_edit.html",
+                              {'form':form, 'user': user},
+                              context_instance=RequestContext(request))
+    else: # request.method == "POST"
+        form = ArticleFrom(request.POST, initial={'author':muser.pk})
+        if form.is_valid():
+            form.save()
+            return  render_to_response("blog_article_edited.html",
+                                       {'message_info':'Статья успешно добавлена',
+                                        'user': user})
+        else:
+            return render_to_response("blog_article_edit.html",
+                              {'form':form, 'user': user},
+                              context_instance=RequestContext(request))
+
+
+def article_edit(request, article_pk=None):
+    perm_checked, user, muser = check_user(request)
+    if user.is_anonymous():
+        return HttpResponseRedirect("/blog/login/")
+    else:
+        if not perm_checked:
+            return HttpResponseRedirect("/")
+
+    if article_pk is None:
+        return HttpResponseRedirect("/blog/user/article/")
+
+    article = models.Article.objects.get(pk=article_pk, author=user)
+
+    if request.method == "GET":
+        form = ArticleFrom(instance=article)
+        return render_to_response("blog_article_edit.html",
+                              {'form':form, 'user': user},
+                              context_instance=RequestContext(request))
+    else: # request.method == "POST"
+        form = ArticleFrom(request.POST, instance=article)
+        if form.is_valid():
+            form.save()
+            return  render_to_response("blog_article_edited.html",
+                                       {'message_info':'Статья успешно изменена',
+                                        'user': user})
+        else:
+            return render_to_response("blog_article_edit.html",
+                              {'form':form, 'user': user},
+                              context_instance=RequestContext(request))
+
+
+def article_remove(request, article_pk=None):
+    perm_checked, user, muser = check_user(request)
+    if user.is_anonymous():
+        return HttpResponseRedirect("/blog/login/")
+    else:
+        if not perm_checked:
+            return HttpResponseRedirect("/")
+
+    if article_pk is None:
+        return HttpResponseRedirect("/blog/user/article/")
+
+    try:
+        article = models.Article.objects.get(pk=article_pk, author=user)
+        article.delete()
+        return HttpResponseRedirect("/blog/user/article/")
+    except:
+        return HttpResponseRedirect("/blog/user/article/")
+
+
+def check_user(request):
+    user = request.user
+    muser = None
+    result = True
+    if not user.is_authenticated():
+        result &= False
+    else:
+        muser = auth.get_user(request)
+    result &= user.has_perms(['blog.add_article', 'blog.change_article', 'blog.delete_article'])
+    return (result, user, muser)
+
+
+def check_access_read_artile(article=None, user=None):
+    if article is None:
+        return False
+
+
+def search(request):
+    user = request.user
+    form = SearchArticleForm(request.GET)
+    valid, vAuth, vTitle, vTags = form.is_empty()
+    print valid, vAuth, vTitle, vTags
+    if valid:
+        cd = form.cleaned_data
+        if vTitle:
+            qtitle = Q(title__icontains=cd['title'].strip())
+        else:
+            qtitle = Q()
+
+        if vAuth:
+            fauthor = cd['author'].strip()
+            qauthor = Q(author__username__icontains=fauthor) | \
+                     Q(author__first_name__icontains=fauthor) | \
+                     Q(author__last_name__icontains=fauthor)
+        else:
+            qauthor = Q()
+
+        if vTags:
+            tagsArr = cd['tags'].split(',')
+            newTagsArr = []
+            for tag in tagsArr:
+                tag = tag.strip()
+                if len(tag)>0:
+                    newTagsArr.append(tag)
+            print newTagsArr
+
+            qtag = models.Tags.objects.filter(name__icontains=tagsArr)
+            print qtag
+            qtags = Q(tags__name__in=qtag)
+        else:
+            qtags = Q()
+        print qtags
+        posts = models.Article.objects.filter(qauthor, qtitle)
+    #
+    return render_to_response("blog_article_inner_list_preview.html", {'user': user, 'articleList':posts})
+

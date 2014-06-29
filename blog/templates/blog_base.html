@@ -11,10 +11,8 @@
 	<title>{% block title %}Профиль пользователя{% endblock %}</title>
 	{% block scripts %}
 	<script type="text/javascript" src="/static/js/jquery.js"></script>
-	<!--script type="text/javascript" src="/static/js/my_script.js"></script-->
     <script type="text/javascript">
         username = "{{user.username}}";
-        password = "{{user.password}}";
         last_login = "{{user.last_login}}";
     </script>
 	{% endblock %}

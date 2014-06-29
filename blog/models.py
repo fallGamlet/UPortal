@@ -21,7 +21,7 @@ class Tags(models.Model):
 
 class ArticlePermission(models.Model):
     name = models.CharField(max_length=50, verbose_name='название')
-
+    code = models.CharField(max_length=50, verbose_name='код')
     def __unicode__(self):
         return u'%s' % (self.name,)
 
