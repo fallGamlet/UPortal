@@ -6,6 +6,7 @@ from django.template import RequestContext
 from django.contrib import auth
 from django.http import HttpResponseRedirect
 from form import LoginForm
+import models
 
 def main(request):
     """
@@ -55,5 +56,10 @@ def log_out(request):
 
 
 def article_list(request):
+    user = request.user
+    if user.is_anonymous():
+        return HttpResponseRedirect("/blog/login/")
 
-    pass
+    posts = models.Article.objects.filter(author__username=user.username)
+    return render_to_response("blog_article_list.html",
+                              {'articles':posts, 'user': user})
