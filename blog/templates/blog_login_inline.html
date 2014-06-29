@@ -1,0 +1,74 @@
+<div id="blog_login_form_css">
+    <div class="blog_login_title_css">Авторизация</div>
+    <form method="POST">{% csrf_token %}
+        {%if form.errors.login_error%}
+        <div class="errorlist">{{ form.errors.login_error }}</div>
+        {%endif%}
+        {{ form.login.errors }}
+        <input type="text" name="login" autofocus placeholder="{{form.login.label}}" {%if form.login.value%}value="{{form.login.value}}"{%endif%}/>
+        {{ form.password.errors }}
+        <input type="password" name="password" placeholder="{{form.password.label}}"/>
+        <div style="text-align:right; margin:5px 0 0;">
+            <a class="to_home" href="/">На главную</a>
+            <input type="submit" value="Принять"/>
+        </div>
+    </form>
+</div>
+<style>
+    #blog_login_form_css {
+        margin:0 auto;
+        padding:10px;
+        width:250px;
+        background:#559;
+    }
+    .blog_login_title_css {
+        color:#FFF;
+        font-weight:bold;
+        margin:0px auto 10px;
+        text-align:center;
+    }
+    #blog_login_form_css input[type="text"],
+    #blog_login_form_css input[type="password"] {
+        border:1px solid #99C;
+        background:#FFF;
+        padding:5px;
+        margin:2px 0;
+        width:240px;
+    }
+    #blog_login_form_css input[type="text"]:focus,
+    #blog_login_form_css input[type="password"]:focus {
+        background:#DDF;
+    }
+
+    #blog_login_form_css input[type="submit"] {
+        background:#FFF;
+        color:#000;
+        border:none;
+        padding:2px 5px;
+        margin:0;
+    }
+    #blog_login_form_css input[type="submit"]:focus {
+        background:#DDF;
+    }
+
+    .errorlist {
+        list-style:none;
+        margin:0;
+        padding:0;
+        color:#E22;
+        font-weight:bold;
+        text-align:center;
+    }
+    a.to_home {
+        text-decoration:none;
+        background:#FFF;
+        color:#000;
+        border:none;
+        padding:3px 5px;
+        margin:0;
+        float:left;
+    }
+    a.to_home:focus {
+        background:#DDF;
+    }
+</style>

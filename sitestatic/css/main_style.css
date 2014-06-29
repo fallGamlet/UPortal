@@ -92,7 +92,7 @@ div.to_admin {
 	color: #FFF;
 	font-family: Times New Roman;
 	font-size: 12pt;
-	font-style: oblique;
+	/*font-style: oblique;*/
 	margin: 0 auto;
 	padding: 15px 0px;
 	text-align: center;

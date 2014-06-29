@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {% block meta %}
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<meta http-equiv="content-language" content="ru" />
+	{% endblock %}
+	{% block links %}
+	<link rel="stylesheet" type="text/css" href="/static/blog/css/base.css">
+	{% endblock %}
+	<title>{% block title %}Профиль пользователя{% endblock %}</title>
+	{% block scripts %}
+	<script type="text/javascript" src="/static/js/jquery.js"></script>
+	<!--script type="text/javascript" src="/static/js/my_script.js"></script-->
+    <script type="text/javascript">
+        username = "{{user.username}}";
+        password = "{{user.password}}";
+        last_login = "{{user.last_login}}";
+    </script>
+	{% endblock %}
+</head>
+<body>
+<div id="blog_background_css">
+{%block background%}
+    <div id="blog_toper_css">
+    {%block top%}
+        <div id="blog_userinfo_css">Пользователь: {{user}}</div>
+        {%if user.is_anonymous%}<div>Что здесь делает гость?</div>{%endif%}
+    {%endblock%}
+    </div>
+    {%block middle%}
+
+    <div id="blog_menu_css">
+    {%block menu%}
+        <div><a href="/">На главную</a></div>
+        <div>
+            <a href="/blog/user/article/">Статьи</a>
+            <a class="blog_button_plus" href="/blog/user/article/new">+</a>
+        </div>
+        <div><a href="/blog/logout/">Выйти</a></div>
+    {%endblock%}
+    </div>
+    <div id="blog_content_css">
+    {%block content%}
+        Content block - Hello? it's your profile.
+    {%endblock%}
+
+    {%endblock%}
+    </div>
+{%endblock%}
+</div>
+<div id="blog_footer_css">
+{%block footer%}
+    footer
+{%endblock%}
+</div>
+</body>
+</html>

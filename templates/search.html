@@ -1,4 +1,4 @@
-{% extends 'base.djhtml' %}
+{% extends 'base.html' %}
 {% block links %}
 	{{ block.super }}
 	<link rel="stylesheet" type="text/css" href="/static/css/widgets.css">
@@ -59,11 +59,11 @@
 {% block workspace %}
 <center>
 <form id='search_book' action='' method='get'>
-	{% include "search_book.djhtml"%}
+	{% include "search_book.html"%}
 </form>
 </center>
 <br>
 {% if books %}
-{% include "book_preview.djhtml"%}
+{% include "book_preview.html"%}
 {% endif %}
 {% endblock %}

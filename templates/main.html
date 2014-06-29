@@ -1,4 +1,4 @@
-{% extends "base.djhtml" %}
+{% extends "base.html" %}
 
 {% block scripts %}
 	{{ block.super }}
@@ -44,7 +44,7 @@
 		<div class='welcome_message' style='background:#fff'>
 			{{ welcomemessage.post|safe }}
 		</div>
-		{#% include 'bell_schedule.djhtml' %#}
+		{#% include 'bell_schedule.html' %#}
 		<!--div id="calendar" class="calendar_table"></div-->
 	</div>
 {% endblock %}

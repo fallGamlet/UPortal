@@ -1,9 +1,10 @@
-{% extends "base.djhtml" %}
+{% extends "base.html" %}
+
 {% block scripts %}
 	{{ block.super }}
 	<script type="text/javascript">
 		$(document).ready(function(){
-			//$(".accordion h4:first").addClass("active");
+			$(".accordion h4:first").addClass("active");
 			$(".accordion div.data").hide();
 
 			$(".accordion h4").click(function(){
@@ -18,14 +19,14 @@
 				$("div.accordion").fadeOut("fast", function(){
 					$("div.accordion h4, div.data").hide();
 					$("div.accordion h4.class_"+id).show();
-					//$("div.accordion div.class_"+id+":first").show();
+					$("div.accordion div.class_"+id+":first").show();
 				}).fadeIn();
 			});
 			$("#edtype_all").click(function(){
 				$("div.accordion").fadeOut("fast", function(){
 					$("div.accordion h4").show();
 					$("div.accordion div.data:not(first)").hide();
-					//$("div.accordion div.data:first").show();
+					$("div.accordion div.data:first").show();
 				}).fadeIn();
 			});
 		});
@@ -37,28 +38,22 @@
 		<b>Направление: {{ directions.0.name|capfirst }}</b>
 		<br />
 		<b>Сокращение: {{ directions.0.sname}}</b>
-		
 		{% if directions.0.educationtype %}
 			<br>
 			<b>Вид обучения: {{ directions.0.educationtype.name }}</b>
 		{% endif %}
-		
 		{% if directions.0.cathedra %}
 			<br>
 			<b>Кафедра: {{ directions.0.cathedra.name }} ({{directions.0.cathedra.sname}})</b>
 		{% endif %}
-		
-		{% if directions.0.post %}
-		<br /> {{ directions.0.post|safe }}
-		{% endif %}
-		
 		{% if directions.0.subjects %}
-			<p>
-			Дисциплины профессионального блока:
+			<br />Дисциплины:
 			{% for subject in directions.0.subjects.all %}
 			<br /> - {{ subject.name|capfirst }}
 			{% endfor %}
-			</p>
+		{% endif %}
+		{% if directions.0.post.body %}
+		<br /> {{ directions.0.post.body }}
 		{% endif %}
 	</div>
 	{% else %}
@@ -86,15 +81,24 @@
 			{% if item.cathedra %}
 			<br><b>Кафедра: {{ item.cathedra.name }}</b>
 			{% endif %}
-			{% if item.description %}
-			<br>{{ item.description|linebreaksbr }} <br>
-			{% endif %}
-		
-			{% if item.subjects %}
+			
+			{% if item.doctypes %}
 			<p>
-				Дисциплины профессионального блока:
-				{% for subject in item.subjects.all %}
-				<br> - {{ subject.name|capfirst }}
+				<br /> <b>Нормативные документы:</b>
+				{% for ndoclist in item.doctypes %}
+					{% if ndoclist|length > 2%}
+						<br />{{ndoclist.1}}:
+						{% for ndoc in ndoclist%}
+							{% if forloop.counter0 >= 2 %} 
+								{% if ndoc.docfile %}
+									<br /> - <a href="{{ ndoc.docfile.url }}">{{ndoc.title}}</a>
+								{% else %}
+									<br /> - {{ndoc.title}}
+								{% endif%}
+							{% endif %}
+						{% endfor %}
+						<br />
+					{% endif %}
 				{% endfor %}
 			</p>
 			{% endif %}

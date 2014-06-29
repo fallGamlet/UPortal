@@ -16,7 +16,11 @@
 </head>
 <body>
 <div id="background">
-	<a href="/admin/"><div class='to_admin'>Администрирование</div></a>
+    {%if user and user.is_authenticated %}
+        <a href="/blog/user/"><div class='to_admin'>Здравствуйте {{user}}</div></a>
+    {%else%}
+	<a href="/blog/user/"><div class='to_admin'>Войти</div></a>
+    {%endif%}
 	<div id="top">
 		<b>
 			<h1 style="font-size: 32pt;">ИНФОРМАЦИОННЫЙ ПОРТАЛ</h1>
@@ -40,7 +44,7 @@
 			Нет ни одного элемента меню
 			{% endfor %}
 		</ul>
-		{% include 'bell_schedule.djhtml' %}
+		{% include 'bell_schedule.html' %}
 	</div>
 	
 	<div id="content">
