@@ -8,6 +8,7 @@ import datetime
 import copy
 from university import models
 from university import forms
+#from blog.forms import SearchArticleForm
 
 urlvoc = {
     "": u"Главная",
@@ -15,6 +16,7 @@ urlvoc = {
     "help": u"Помощь",
     "search": u"Поиск",
     "articles": u"Статьи",
+    "article": u"Статьи",
     "content": u"Учебный материал",
     "cathedra": u"Информация о кафедрах",
     "direction": u"Направления",
@@ -28,7 +30,7 @@ menulinks = (
     ("/cathedra/direction/", u"Информация о направлениях"),
     ("/news/", u"Новости и объявления"),
     ("/schedule/", u"Расписание"),
-    ("/normdocument", u"Нормативные документы"),
+    ("/normdocument/", u"Нормативные документы"),
     ("/content/", u"Учебный материал (поиск)"),  # ("/search/", u"Поиск"),
 )
 
@@ -80,6 +82,11 @@ def search(request):
         sform = forms.SearchBook()
 
     return render_to_response('search.html', {'menulinks': menulinks, 'links': links, 'sform': sform, 'user':request.user})
+
+
+def search_article(request):
+    links = getlinks(request)
+    return render_to_response('search_article.html', {'menulinks': menulinks, 'links': links, 'user':request.user})
 
 
 def content(request):

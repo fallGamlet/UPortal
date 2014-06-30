@@ -1,6 +1,55 @@
 {% extends "base.html" %}
 {% block workspace %}
-<div>
-	<a class="botton" style="float:right; font-size: 22pt;" href="/content/search/">Поиск</a>
+<div class="search_container">
+	<a class="button" href="/content/search/article">Поиск пользовательских статей</a>
+    <a class="button" href="/content/search/">Поиск литературы</a>
 </div>
+<style>
+.search_container {
+    background:none;
+    margin:15px;
+    padding:10px;
+    position:relative;
+}
+.search_container>a.button {
+    display: inline-block;
+    vertical-align: top;
+    width: 200px;
+    height: 100px;
+    font-size: 14pt;
+    color: #FBFBFB;
+    text-decoration: none;
+    padding: 5px;
+    margin: 10px;
+    background: #000DA2;
+    font-weight: bold;
+
+    animation: button_anim_unhover 1s;
+}
+.search_container>a.button:hover {
+    color: #000DA2;
+    background: #FBFBFB;
+    animation: button_anim_hover 1s;
+}
+@keyframes button_anim_hover {
+    from {
+        background:#000DA2;
+        color:#FBFBFB;
+    }
+    to {
+        background:#FBFBFB;
+        color:#000DA2;
+    }
+}
+@keyframes button_anim_unhover {
+    to {
+        background:#000DA2;
+        color:#FBFBFB;
+    }
+    from {
+        background:#FBFBFB;
+        color:#000DA2;
+    }
+}
+</style>
 {% endblock %}

@@ -6,7 +6,7 @@ from django.template import RequestContext
 from django.contrib import auth
 from django.http import HttpResponseRedirect
 from django.db.models import Q
-from form import LoginForm, ArticleFrom, SearchArticleForm
+from forms import LoginForm, ArticleFrom, SearchArticleForm
 import models
 
 def main(request):
@@ -172,7 +172,7 @@ def search(request):
     user = request.user
     form = SearchArticleForm(request.GET)
     valid, vAuth, vTitle, vTags = form.is_empty()
-    print valid, vAuth, vTitle, vTags
+    #print valid, vAuth, vTitle, vTags
     if valid:
         cd = form.cleaned_data
         if vTitle:
@@ -188,21 +188,21 @@ def search(request):
         else:
             qauthor = Q()
 
-        if vTags:
-            tagsArr = cd['tags'].split(',')
-            newTagsArr = []
-            for tag in tagsArr:
-                tag = tag.strip()
-                if len(tag)>0:
-                    newTagsArr.append(tag)
-            print newTagsArr
-
-            qtag = models.Tags.objects.filter(name__icontains=tagsArr)
-            print qtag
-            qtags = Q(tags__name__in=qtag)
-        else:
-            qtags = Q()
-        print qtags
+        # if vTags:
+        #     tagsArr = cd['tags'].split(',')
+        #     newTagsArr = []
+        #     for tag in tagsArr:
+        #         tag = tag.strip()
+        #         if len(tag)>0:
+        #             newTagsArr.append(tag)
+        #     print newTagsArr
+        #
+        #     qtag = models.Tags.objects.filter(name__icontains=tagsArr)
+        #     print qtag
+        #     qtags = Q(tags__name__in=qtag)
+        # else:
+        #     qtags = Q()
+        # print qtags
         posts = models.Article.objects.filter(qauthor, qtitle)
     #
     return render_to_response("blog_article_inner_list_preview.html", {'user': user, 'articleList':posts})

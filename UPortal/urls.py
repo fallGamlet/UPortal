@@ -37,6 +37,7 @@ urlpatterns = patterns('',
     (r'^schedule/$', views.schedule),
     (r'^content/$', views.content),
     (r'^content/search/$', views.search),
+    (r'^content/search/article/$', views.search_article),
     (r'^curdate/$', views.getcurrentdate),
     
     (r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT}),
