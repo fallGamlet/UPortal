@@ -218,5 +218,6 @@ pip-log.txt
 *.pyc
 media/
 ckeditor/
+sitestatic/admin/
 south/
 .idea/
