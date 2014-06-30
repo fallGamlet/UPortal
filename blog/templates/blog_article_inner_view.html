@@ -1,0 +1,30 @@
+<div class="article_view_css">
+    <h3 class="article_title_css">
+        {{article.title}}
+    </h3>
+    <div class="article_description" style="text-align:right;">
+        Дата:</span> <span class="value">{{article.date}}</span>
+        <br>
+        Автор: <span class="value">{{article.author.get_full_name}}</span>
+    </div>
+    <div class="article_body">
+        {{article.body}}
+    <div>
+    <div>
+        <span class="label">Теги:</span>
+        {% for tag in article.tags.all %}
+        {% if forloop.last %}
+        <span class="article_tag_css">{{tag.name}}</span>
+        {%else%}
+        <span class="article_tag_css">{{tag.name}}, </span>
+        {%endif%}
+        {%endfor%}
+    </div>
+<style>
+    .article_view_css {
+        background:#FFF;
+        margin:0;
+        padding:5px;
+    }
+</style>
+</div>

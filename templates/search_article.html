@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% block links %}
+	{{ block.super }}
+	<link rel="stylesheet" type="text/css" href="/static/css/widgets.css">
+{% endblock %}
+{% block scripts %}
+	{{ block.super }}
+
+<script ype="text/javascript">
+	$(document).ready(function(){
+        $("input#search_article_button").click(function(){
+            var query = $("form#search_article").serialize();
+            $.ajax({
+                type: "GET",
+                url: "/blog/user/article/search/",
+                data: query,
+                error: function(err) {
+                    err = err;
+                    console.log(err);
+                },
+                success: function (data, textStatus) {
+                    $("#article_finded_container").html(data);
+                }
+            });
+        });
+	});
+</script>
+{% endblock %}
+{% block workspace %}
+<div class="form_article_search_css" style="padding:0; margin:0 auto; width:300px;">
+    <form id='search_article' action='' method='get'>
+        <div>
+            <input type="text" name="author" placeholder="Автор статьи"/>
+            <input type="text" name="title" placeholder="Заголовок статьи"/>
+        </div>
+        <div>
+            <input id="search_article_button" type="button" value="Найти"/>
+        </div>
+    </form>
+</div>
+<br>
+<div id="article_finded_container">
+
+</div>
+{% endblock %}
