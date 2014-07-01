@@ -8,11 +8,11 @@
 
 <script ype="text/javascript">
 	$(document).ready(function(){
-        $("input#search_article_button").click(function(){
+        $("input#search_article_button").click(function() {
             var query = $("form#search_article").serialize();
             $.ajax({
                 type: "GET",
-                url: "/blog/user/article/search/",
+                url: "/blog/user/article/search_inner/",
                 data: query,
                 error: function(err) {
                     err = err;
@@ -20,6 +20,25 @@
                 },
                 success: function (data, textStatus) {
                     $("#article_finded_container").html(data);
+                    
+                    $(".article_button").click(function() {
+						console.log("article_button_view vlicked...");
+						var article_pk = $(this).attr("value");
+						var get_url = "/blog/user/article/article_view_inner/"+article_pk+"/";
+						console.log(get_url)
+						$.ajax({
+							type: "GET",
+							url: get_url,
+							//~ data: query,
+							error: function(err) {
+								err = err;
+								console.log(err);
+							},
+							success: function (data, textStatus) {
+								$("#article_finded_container").html(data);
+							}
+						});
+					});
                 }
             });
         });

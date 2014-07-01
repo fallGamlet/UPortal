@@ -1,4 +1,5 @@
 <div class="article_view_css">
+{%if article %}
     <h3 class="article_title_css">
         {{article.title}}
     </h3>
@@ -8,9 +9,11 @@
         Автор: <span class="value">{{article.author.get_full_name}}</span>
     </div>
     <div class="article_body">
-        {{article.body}}
+	{% autoescape off %}
+		{{ article.body }}   
+	{% endautoescape %}
     <div>
-    <div>
+    <div class="article_tags_css">
         <span class="label">Теги:</span>
         {% for tag in article.tags.all %}
         {% if forloop.last %}
@@ -20,11 +23,36 @@
         {%endif%}
         {%endfor%}
     </div>
+{%else%}
+<div class="article_view_error_css">
+	Вы не можете просмотреть данную статью!
+	<br/>
+	{%if error %}
+	{{ error }}
+	{%endif%}
+</div>
+{%endif%}
 <style>
     .article_view_css {
         background:#FFF;
         margin:0;
         padding:5px;
     }
+    .article_view_error_css {
+		color:#0E1056;
+		background:#FAFAFA;
+		font-size:14pt;
+	}
+	.article_view_css,
+	.article_title_css,
+	.article_body {
+		background:#FFF;
+		text-align:left;
+		color:#000;
+	}
+	.article_description,
+	.article_tags_css {
+		background:#FFF;
+	}
 </style>
 </div>

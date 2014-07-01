@@ -16,11 +16,14 @@
 </head>
 <body>
 <div id="background">
+	<div class='to_admin'>
     {%if user and user.is_authenticated %}
-        <a href="/blog/user/"><div class='to_admin'>Здравствуйте {{user}}</div></a>
+		<a href="/blog/logout/">Выйти</a>
+		<a href="/blog/user/">Здравствуйте {{user}}</a>
     {%else%}
-	<a href="/blog/user/"><div class='to_admin'>Войти</div></a>
+		<a href="/blog/user/">Войти</a>
     {%endif%}
+    </div>
 	<div id="top">
 		<b>
 			<h1 style="font-size: 32pt;">ИНФОРМАЦИОННЫЙ ПОРТАЛ</h1>
@@ -37,6 +40,7 @@
 	</div>
 	
 	<div id="menu">
+	{%block menu %}
 		<ul>
 			{% for item in menulinks %}
 			<li><a href="{{ item.0 }}">{{ item.1 }}<span></span></a></li>
@@ -44,14 +48,13 @@
 			Нет ни одного элемента меню
 			{% endfor %}
 		</ul>
-		{% include 'bell_schedule.html' %}
+		{#% include 'bell_schedule.html' %#}
+	{%endblock%}
 	</div>
 	
 	<div id="content">
 		{% block workspace %} {% endblock %}
 	</div>
-	{% comment %}
-	{% endcomment %}
 </div>
 
 <div id="foot">

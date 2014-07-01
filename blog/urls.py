@@ -10,5 +10,7 @@ urlpatterns = patterns('',
     url(r'^user/article/new/$', 'blog.views.article_new'),
     url(r'^user/article/edit/(\d+)/$', 'blog.views.article_edit'),
     url(r'^user/article/remove/(\d+)/$', 'blog.views.article_remove'),
-    url(r'^user/article/search/$', 'blog.views.search')
+    url(r'^user/article/search_inner/$', 'blog.views.search_inner'),
+    url(r'^user/article/article_view_inner/(\d+)/$', 'blog.views.article_view_inner'),
+    
 )

@@ -24,6 +24,12 @@
 		});
 	</script>
 {% endblock %}
+
+{%block menu%}
+{{block.super}}
+{% include 'bell_schedule.html' %}
+{%endblock%}
+
 {% block workspace %} 
 	<div style="width: 300px; float:right; background:transparent;">
 		<div id="calendar" class="calendar_table"></div>
@@ -44,7 +50,6 @@
 		<div class='welcome_message' style='background:#fff'>
 			{{ welcomemessage.post|safe }}
 		</div>
-		{#% include 'bell_schedule.html' %#}
 		<!--div id="calendar" class="calendar_table"></div-->
 	</div>
 {% endblock %}

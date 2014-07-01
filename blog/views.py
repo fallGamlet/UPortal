@@ -168,7 +168,7 @@ def check_access_read_artile(article=None, user=None):
         return False
 
 
-def search(request):
+def search_inner(request):
     user = request.user
     form = SearchArticleForm(request.GET)
     valid, vAuth, vTitle, vTags = form.is_empty()
@@ -207,3 +207,23 @@ def search(request):
     #
     return render_to_response("blog_article_inner_list_preview.html", {'user': user, 'articleList':posts})
 
+
+def article_view_inner(request, article_pk=None):
+	perm_checked, user, muser = check_user(request)
+	error = None
+	try:
+		post = models.Article.objects.get(pk=article_pk)
+	except:
+		post = None
+	
+	if post is not None:
+		if post.read_access.code == "only_logined" and not user.is_authenticated():
+			post = None
+			error = "Статья доступна только авторизованым пользователям!"
+		else:
+			if post.read_access.code == "only_mygroup" and \
+				not user.is_superuser and \
+				len(user.groups.filter(pk__in=post.author.groups.all())) == 0:
+				post = None
+				error = "Статья доступна только пользователям определенной группы!"
+	return render_to_response("blog_article_inner_view.html", {'user': user, 'article':post, 'error':error})

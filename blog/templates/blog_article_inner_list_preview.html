@@ -2,6 +2,7 @@
 {% for article in articleList %}
     <div class="article_preview_css">
         <h3 class="article_title_css">
+            <div class="article_button" id="article_button_{{article.pk}}"value="{{article.pk}}">Обзор</div>
             {{article.title}}
         </h3>
         <div class="article_description">
@@ -19,6 +20,8 @@
             {%endfor%}
         </div>
     </div>
+{%empty%}
+	<div class="article_preview_nonfind">Извините, но ни одной статьи не найдено</div>
 {%endfor%}
 <style>
     .article_list_preview_css {
@@ -40,8 +43,19 @@
         background:#CCF;
         margin:0;
         padding:3px 5px;
-        cursor: pointer;
     }
+    .article_button {
+		float:right;
+		margin:0px;
+		padding:3px 5px;
+		background:#FFF;
+		box-shadow:0 0 5px 1px rgba(0,0,0, 0.5);
+		cursor: pointer;
+	}
+	.article_button:hover {
+		box-shadow:0 0 5px 3px rgba(0,0,90, 0.5);
+		color:#151872;
+	}
     .article_description {
         background:#FCFCFC;
         margin:0;
@@ -51,5 +65,13 @@
     .article_description>span.label {
         background:#FAFAFA;
     }
+    .article_preview_nonfind {
+		font-size:14pt;
+		font-weight:bold;
+		color:#151872;
+		background:#FAFAFA;
+		padding:10px;
+		marging:0 auto;
+	}
 </style>
 </div>
